@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AnimalesSalvajes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="fonts/iconic/css/material-design-iconic-font.min.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/css-hamburgers/hamburgers.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/animsition/css/animsition.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/select2/select2.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="vendor/daterangepicker/daterangepicker.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <!--===============================================================================================-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!--===============================================================================================-->
+  </head>
+  <body>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"      
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <figure class="snip0056">
+              <figcaption>
+                <h2><span id="nombreModal"></span></h2>
+                <p id="comentarioModal"></p>
+                <!-- <div class="icons"><a href="#"><i class="ion-ios-home"></i></a><a href="#"><i class="ion-ios-email"></i></a><a href="#"><i class="ion-ios-telephone"></i></a></div> -->
+              </figcaption>
+              <img id="imagenModal" src="" alt="sample8" />
+              <div class="position"></div>
+            </figure>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger">Eliminar</button>
+            <button type="button" class="btn btn-info">Editar</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="main">
+      <div
+        class="container-login100"
+        style="background-image: url('images/background.jpg')"
+      >
+        <div class="row w-100">
+          <!-- Lado Iazquierdo ( Registrar Animal) -->
+          <div class="col-12 col-sm-4">
+            <div class="wrap-login100 p-l-55 p-r-55 p-t-30 p-b-30">
+              <form class="login100-form validate-form">
+                <h2 class="login100-form-title p-b-37">Registrar Animal</h2>
+
+                <label class="txt1 text-center">Nombre del animal:</label>
+                <div
+                  class="wrap-input100 validate-input m-b-25"
+                  data-validate="Enter Animal"
+                >
+                  <select
+                    class="form-control input100"
+                    name="animal"
+                    id="animal"
+                  >
+                    <option class="input100" disabled selected>
+                      Seleccione un animal
+                    </option>
+                    <option class="input100" value="lion">León</option>
+                    <option class="input100" value="wolf">Lobo</option>
+                    <option class="input100" value="bear">Oso</option>
+                    <option class="input100" value="snake">Serpiente</option>
+                    <option class="input100" value="eagle">Águila</option>
+                  </select>
+                  <span class="focus-input100"></span>
+                </div>
+
+                <label class="txt1 text-center">Años de edad estimados:</label>
+                <div
+                  class="wrap-input100 validate-input m-b-25"
+                  data-validate="Enter Edad"
+                >
+                  <select class="form-control input100" name="state" id="edad">
+                    <option class="input100" disabled selected>
+                      Seleccione un rango de años
+                    </option>
+                    <option class="input100" value="0 - 1 años">
+                      0 - 1 años
+                    </option>
+                    <option class="input100" value="1 - 3 años">
+                      1 - 3 años
+                    </option>
+                    <option class="input100" value="3 - 5 años">
+                      3 - 5 años
+                    </option>
+                    <option class="input100" value="5 - 8 años">
+                      5 - 8 años
+                    </option>
+                    <option class="input100" value="8 - 10 años">
+                      8 - 10 años
+                    </option>
+                    <option class="input100" value="Más de 10 años">
+                      Más de 10 años
+                    </option>
+                  </select>
+                  <span class="focus-input100"></span>
+                </div>
+
+                <label class="txt1 text-center">Cometario</label>
+                <div
+                  class="wrap-input100 validate-input m-b-20"
+                  data-validate="Ingrese un comentario"
+                >
+                  <textarea
+                    class="input100"
+                    style="height: 110px"
+                    name="username"
+                    placeholder="Ingrese un comentario"
+                    id="comentario"
+                  ></textarea>
+                  <span class="focus-input100"></span>
+                </div>
+
+                <div class="flex-c p-b-40">
+                  <div class="p-5 card" id="boxPreview">
+                    <div id="preview"></div>
+                  </div>
+                </div>
+
+                <div class="container-login100-form-btn">
+                  <button class="login100-form-btn" id="botonDeRegistro">
+                    Registrar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Lado Derecho ( Cards Animales) -->
+          <div class="col-12 col-sm-8">
+            <div
+              class="wrap-login100 p-t-30 p-b-30 row"
+              id="contenedorCards"
+            ></div>
+          </div>
+          <!-- End Row -->
+        </div>
+      </div>
+    </section>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/validacion.js"></script>
+    <script defer src="js/script.js" type="module"></script>
+  </body>
+</html>
