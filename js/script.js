@@ -34,7 +34,7 @@ const buscarImagenes = async (inputBusqueda) => {
     const urlUnesplash = `https://api.unsplash.com/search/photos?page=1&query=${inputBusqueda}&client_id=${accessKeyUnesplash}&orientation=landscape`;
     const requestUnesplash = await axios(urlUnesplash);
     const urlRequestUnesplash = requestUnesplash.data.results[0].urls.full;
-    $("#image").attr("src", `${urlRequestUnesplash}`);
+    //$("#image").attr("src", `${urlRequestUnesplash}`);
     return urlRequestUnesplash;
   } catch (err) {
     alert("Imagen no Encontrada");
@@ -61,20 +61,30 @@ const enviarDatosFirebase = async (animalABuscar, edad, comentario) => {
   }
 };
 
-//acativar ventana modal personalizada al hacer click en la tarjeta
+//activar ventana modal personalizada al hacer click en la tarjeta
 window.rellenarVentanaModal = (animalABuscar, edad, comentario, imagen) => {
-  alert(animalABuscar, edad, comentario, imagen);
+  
   $("#exampleModalCenter").modal("toggle");  
   $("#imagenModal").attr("src",`${imagen}`);
   $("#comentarioModal").html(comentario);
-  $("#nombreModal").html(animalABuscar);
-  console.log($(this));
+  $("#comentarioModal").append(`<p>${edad}</p>`);
+  $("#nombreModal").html(animalABuscar);  
 };
+
+window.playAudio = (buttonAudio) =>{
+    event.stopPropagation();   
+    const divPadre = $(buttonAudio).offsetParent()    
+    const video = $(divPadre).find("video")
+    video[0].play()    
+}
 
 // crea uan tarjeta nueva cuando se llena y se envia el formulario
 const crearTarjetaDeAnimal = async (animalABuscar, edad, comentario) => {
   const imagenAnimal = await buscarImagenes(animalABuscar);
   const sonidoAnimal = await buscarSonidosEnApi(animalABuscar);
+  const instanciaAnimal = createClass(animalABuscar,edad,imagenAnimal,comentario,sonidoAnimal)
+  console.log(instanciaAnimal);
+  animalABuscar = replaceName(animalABuscar)
   $("#contenedorCards").append
   (
     `
@@ -83,29 +93,56 @@ const crearTarjetaDeAnimal = async (animalABuscar, edad, comentario) => {
                 <div class="background-block">
                     <img src="${imagenAnimal}" alt="profile-sample1" class="background"/>
                 </div>
-                <div class="profile-thumb-block">                    
-					<div class="profile"> <i class="fa fa-volume-up"></i></div>
+                <div class="profile-thumb-block" ">                    
+					<div class="profile" onclick="playAudio(this)"> <i class="fa fa-volume-up"></i></div>
                 </div>
                 <div class="card-content">
                     <h2>${animalABuscar}<small>${edad}</small></h3>
                     <div class="icon-block">						
 					</div>
                 </div>
-                <video src="${sonidoAnimal}" class="d-none" autoplay=""></video>
+                <video src="${sonidoAnimal}" class="d-none"></video>
             </div>              
            </div>        
         `
     );
 };
 
-$("form").on("submit", (event) => {
-  event.preventDefault();
-  const animalABuscar = $("#animal").val();
-  const edad = $("#edad").val();
-  const comentario = $("#comentario").val();
-  buscarSonidosEnApi(animalABuscar);
-  buscarImagenes(animalABuscar);
-  crearTarjetaDeAnimal(animalABuscar, edad, comentario);
+const listaAnimales = {
+  "lion":"Leon",
+  "wolf":"Lobo",  
+  "bear":"Oso",
+  "snake":"Serpiente",
+  "eagle":"Águila",
+  "cat":"Gato",
+  "dog":"Perro",
+  "cow":"Vaca",
+  "horse":"Caballo",
+  "goat":"Cabra",
+  "monkey":"Mono",
+}
 
-  // enviarDatosFirebase(animalABuscar,edad,comentario)
-});
+const replaceName = (name) =>listaAnimales[name] ? listaAnimales[name]: name
+
+const createClass = function (nombre,edad,img,comentario,sonido) {
+  nombre = replaceName(nombre)
+  if (["Leon","Lobo","Oso","Serpiente","Aguila"].includes(nombre) ){
+    const aux = eval(`new ${nombre}(nombre,edad,img,comentario,sonido)`)
+    return aux
+  } 
+};
+
+(()=>{
+  $("form").on("submit", (event) => {
+    event.preventDefault();
+    const animalABuscar = $("#animal").val();
+    const edad = $("#edad").val();
+    const comentario = $("#comentario").val();
+    // buscarSonidosEnApi(animalABuscar);
+    // buscarImagenes(animalABuscar);
+    crearTarjetaDeAnimal(animalABuscar, edad, comentario);
+  
+    // enviarDatosFirebase(animalABuscar,edad,comentario)
+  });
+  
+})()
